@@ -4,8 +4,8 @@ import styled from "styled-components";
 
 const Button = styled(MuiButton)`
   position: absolute;
-  top: 8px;
-  right: 8px;
+  top: 16px;
+  right: 16px;
 `;
 
 const Logout: React.FunctionComponent<{ logout: () => void }> = ({
