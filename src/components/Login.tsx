@@ -76,11 +76,6 @@ const Login: React.FunctionComponent<{
               Login
             </Button>
           </MuiGrid>
-          {/* <MuiGrid item xs={12}>
-            <Button variant="contained" disableElevation onClick={register}>
-              Register
-            </Button>
-          </MuiGrid> */}
         </MuiGrid>
       </form>
     </MuiContainer>

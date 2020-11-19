@@ -2,6 +2,7 @@ import "fontsource-roboto";
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
+import { SnackbarProvider } from "notistack";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { StylesProvider } from "@material-ui/core/styles";
 import store from "./app/store";
@@ -12,10 +13,12 @@ import reportWebVitals from "./reportWebVitals";
 ReactDOM.render(
   <React.StrictMode>
     <StylesProvider injectFirst>
-      <Provider store={store}>
-        <CssBaseline />
-        <App />
-      </Provider>
+      <SnackbarProvider>
+        <Provider store={store}>
+          <CssBaseline />
+          <App />
+        </Provider>
+      </SnackbarProvider>
     </StylesProvider>
   </React.StrictMode>,
   document.getElementById("root")

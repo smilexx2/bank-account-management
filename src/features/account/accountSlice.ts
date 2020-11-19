@@ -22,7 +22,7 @@ const initialState: AccountState = {
   selectedAccount: undefined,
 };
 
-export const fetchAccounts = createAsyncThunk(
+export const fetchAccounts = createAsyncThunk<Account[]>(
   "account/fetchAccounts",
   async () => {
     const { data } = await axios.get("/accounts");
@@ -38,7 +38,10 @@ export const addNewAccount = createAsyncThunk<
   try {
     response = await axios.post("accounts", { pending: true, ...account });
   } catch (err) {
-    return thunkApi.rejectWithValue(err);
+    if (err.response) {
+      return thunkApi.rejectWithValue(err.response);
+    }
+    throw err;
   }
 
   return response.data as Account;

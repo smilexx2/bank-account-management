@@ -13,6 +13,7 @@ import styled from "styled-components";
 import { RootState } from "../../app/store";
 import AccountForm from "./AccountForm";
 import { Account, fetchAccounts, selectAccount } from "./accountSlice";
+import GlobalError from "../../components/GlobalError";
 
 const Paper = styled(MuiPaper)`
   width: 100%;
@@ -37,7 +38,7 @@ const Accounts: React.FunctionComponent = () => {
   }, [status, dispatch]);
 
   const handleListItemClick = (
-    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    _: React.MouseEvent<HTMLDivElement, MouseEvent>,
     account: Account
   ) => {
     dispatch(selectAccount(account));
@@ -47,32 +48,37 @@ const Accounts: React.FunctionComponent = () => {
     setAccountFormOpen(true);
   };
 
+  if (Object.values(status).includes("failed")) {
+    return <GlobalError />;
+  }
+
   return (
     <>
       <MuiContainer maxWidth="xs">
-        <Paper>
-          <MuiList>
-            {accounts.map((account) => (
-              <MuiListItem
-                button
-                onClick={(event) => handleListItemClick(event, account)}
-                key={account.id}
-                disabled={account.pending}
-              >
-                <MuiListItemText
-                  primary={account.name}
-                  secondary={account.type}
-                />
-                {account.pending && (
-                  <MuiListItemSecondaryAction style={{ opacity: "0.5" }}>
-                    Pending
-                  </MuiListItemSecondaryAction>
-                )}
-              </MuiListItem>
-            ))}
-          </MuiList>
-        </Paper>
-        {}
+        {status.accounts === "succeeded" && (
+          <Paper>
+            <MuiList>
+              {accounts.map((account) => (
+                <MuiListItem
+                  button
+                  onClick={(event) => handleListItemClick(event, account)}
+                  key={account.id}
+                  disabled={account.pending}
+                >
+                  <MuiListItemText
+                    primary={account.name}
+                    secondary={account.type}
+                  />
+                  {account.pending && (
+                    <MuiListItemSecondaryAction style={{ opacity: "0.5" }}>
+                      Pending
+                    </MuiListItemSecondaryAction>
+                  )}
+                </MuiListItem>
+              ))}
+            </MuiList>
+          </Paper>
+        )}
       </MuiContainer>
       <AddButton
         color="secondary"

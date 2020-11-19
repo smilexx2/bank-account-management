@@ -6,6 +6,7 @@ import styled from "styled-components";
 import { RootState } from "../../app/store";
 import { selectAccount } from "../account/accountSlice";
 import { fetchTransactions, reset } from "./transactionSlice";
+import GlobalError from "../../components/GlobalError";
 
 const Container = styled.div`
   align-self: stretch;
@@ -52,9 +53,12 @@ const Transaction: React.FunctionComponent = () => {
 
   return (
     <>
-      <Container>
-        <DataGrid rows={transactions} columns={columns} />
-      </Container>
+      {status === "failed" && <GlobalError />}
+      {status === "succeeded" && (
+        <Container>
+          <DataGrid rows={transactions} columns={columns} />
+        </Container>
+      )}
       <Button variant="contained" onClick={handleButtonClick} disableElevation>
         Back
       </Button>

@@ -7,6 +7,7 @@ import Transactionss from "./features/transaction/Transactions";
 import useAuth from "./hooks/useAuth";
 import { useSelector } from "react-redux";
 import { RootState } from "./app/store";
+import ErrorBoundary from "./ErrorBoundary";
 
 const Container = styled.div`
   min-height: 100vh;
@@ -21,14 +22,14 @@ function App() {
     (state: RootState) => state.account.selectedAccount
   );
   return (
-    <>
+    <ErrorBoundary>
       <Container>
         {!accessToken && <Login login={login} />}
         {accessToken && !selectedAccount && <Accounts />}
         {accessToken && selectedAccount && <Transactionss />}
       </Container>
       {accessToken && <Logout logout={logout} />}
-    </>
+    </ErrorBoundary>
   );
 }
 
