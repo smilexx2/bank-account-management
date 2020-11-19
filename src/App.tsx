@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Login from "./components/Login";
+import Logout from "./components/Logout";
 import Account from "./features/account/Account";
 import useAuth from "./hooks/useAuth";
 
@@ -12,13 +13,16 @@ const Container = styled.div`
 `;
 
 function App() {
-  const { accessToken, login } = useAuth();
-  console.log({ accessToken });
+  const { accessToken, login, logout } = useAuth();
+
   return (
-    <Container>
-      {!accessToken && <Login login={login} />}
-      {accessToken && <Account />}
-    </Container>
+    <>
+      <Container>
+        {!accessToken && <Login login={login} />}
+        {accessToken && <Account />}
+      </Container>
+      {accessToken && <Logout logout={logout} />}
+    </>
   );
 }
 

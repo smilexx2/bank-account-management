@@ -2,7 +2,9 @@ import axios from "axios";
 import { useState } from "react";
 
 const useAuth = () => {
-  const [accessToken, setAccessToken] = useState(undefined);
+  const [accessToken, setAccessToken] = useState(
+    sessionStorage.getItem("accessToken")
+  );
 
   const login = async (email: string, password: string) => {
     const { data } = await axios.post("/login", {
@@ -11,6 +13,7 @@ const useAuth = () => {
     });
 
     if (data.accessToken) {
+      sessionStorage.setItem("accessToken", data.accessToken);
       setAccessToken(data.accessToken);
     }
   };
@@ -21,7 +24,8 @@ const useAuth = () => {
     // });
   };
   const logout = () => {
-    setAccessToken(undefined);
+    sessionStorage.removeItem("accessToken");
+    setAccessToken(null);
   };
 
   return { accessToken, login, register, logout };
