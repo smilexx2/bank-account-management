@@ -1,6 +1,7 @@
 import React from "react";
 import MuiButton from "@material-ui/core/Button";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
 
 const Button = styled(MuiButton)`
   position: absolute;
@@ -11,11 +12,18 @@ const Button = styled(MuiButton)`
 const Logout: React.FunctionComponent<{ logout: () => void }> = ({
   logout,
 }) => {
+  const dispatch = useDispatch();
+
+  const handleButtonClick = () => {
+    logout();
+    dispatch({ type: "LOGOUT" });
+  };
+
   return (
     <Button
       variant="contained"
       color="primary"
-      onClick={logout}
+      onClick={handleButtonClick}
       disableElevation
     >
       Logout

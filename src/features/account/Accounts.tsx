@@ -1,18 +1,18 @@
 import React from "react";
 import MuiContainer from "@material-ui/core/Container";
+import MuiDialog from "@material-ui/core/Dialog";
 import MuiFab from "@material-ui/core/Fab";
 import MuiList from "@material-ui/core/List";
 import MuiListItem from "@material-ui/core/ListItem";
 import MuiListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import MuiListItemText from "@material-ui/core/ListItemText";
 import MuiPaper from "@material-ui/core/Paper";
-import MuiDialog from "@material-ui/core/Dialog";
 import AddIcon from "@material-ui/icons/Add";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { RootState } from "../../app/store";
-import { fetchAccounts } from "./accountSlice";
 import AccountForm from "./AccountForm";
+import { fetchAccounts, selectAccount, Account } from "./accountSlice";
 
 const Paper = styled(MuiPaper)`
   width: 100%;
@@ -24,9 +24,8 @@ const AddButton = styled(MuiFab)`
   right: 16px;
 `;
 
-const Account: React.FunctionComponent = () => {
+const Accounts: React.FunctionComponent = () => {
   const dispatch = useDispatch();
-  const [selectedIndex, setSelectedIndex] = React.useState(1);
   const [isAccountFormOpen, setAccountFormOpen] = React.useState(false);
   const status = useSelector((state: RootState) => state.account.status);
   const accounts = useSelector((state: RootState) => state.account.accounts);
@@ -37,10 +36,9 @@ const Account: React.FunctionComponent = () => {
 
   const handleListItemClick = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
-    index: number
+    account: Account
   ) => {
-    console.log({ index });
-    setSelectedIndex(index);
+    dispatch(selectAccount(account));
   };
 
   const handleAddButtonClick = () => {
@@ -52,18 +50,19 @@ const Account: React.FunctionComponent = () => {
       <MuiContainer maxWidth="xs">
         <Paper>
           <MuiList>
-            {accounts.map((account, index) => (
+            {accounts.map((account) => (
               <MuiListItem
                 button
-                onClick={(event) => handleListItemClick(event, index)}
+                onClick={(event) => handleListItemClick(event, account)}
                 key={account.id}
+                disabled={account.pending}
               >
                 <MuiListItemText
                   primary={account.name}
                   secondary={account.type}
                 />
                 {account.pending && (
-                  <MuiListItemSecondaryAction>
+                  <MuiListItemSecondaryAction style={{ opacity: "0.5" }}>
                     Pending
                   </MuiListItemSecondaryAction>
                 )}
@@ -88,4 +87,4 @@ const Account: React.FunctionComponent = () => {
   );
 };
 
-export default Account;
+export default Accounts;

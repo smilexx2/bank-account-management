@@ -1,11 +1,23 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import accountReducer from "../features/account/accountSlice";
+import transactionReducer from "../features/transaction/transactionSlice";
 import { useDispatch } from "react-redux";
 
+const appReducer = combineReducers({
+  account: accountReducer,
+  transaction: transactionReducer,
+});
+
+const rootReducer = (state: any, action: any) => {
+  if (action.type === "LOGOUT") {
+    // check for action type
+    state = undefined;
+  }
+  return appReducer(state, action);
+};
+
 const store = configureStore({
-  reducer: {
-    account: accountReducer,
-  },
+  reducer: rootReducer,
 });
 
 export default store;

@@ -18,6 +18,23 @@
       "name": "My Daily Spending",
       "type": "everyday",
       "pending": false
+    },
+    {
+      "pending": true,
+      "name": "fewfewfewf",
+      "type": "everyday",
+      "id": 3
+    }
+  ],
+  "transactions": [
+    {
+      "id": 1,
+      "date": "2020-10-23T00:00:00.000Z",
+      "detail": "Transfer from Account 1",
+      "deposit": null,
+      "withdrawals": "$1.00",
+      "balance": "$7.02",
+      "accountId": 1
     }
   ]
 }

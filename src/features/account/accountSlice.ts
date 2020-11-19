@@ -1,7 +1,7 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 
-interface Account {
+export interface Account {
   id: number;
   name: string;
   type: string;
@@ -12,16 +12,18 @@ type AccountState = {
   accounts: Account[];
   status: { [key: string]: "idle" | "loading" | "succeeded" | "failed" };
   error: { [key: string]: string | undefined };
+  selectedAccount?: Account;
 };
 
 const initialState: AccountState = {
   accounts: [],
   status: { accounts: "idle", addNewAccount: "idle" },
   error: { accounts: undefined, addNewAccount: undefined },
+  selectedAccount: undefined,
 };
 
 export const fetchAccounts = createAsyncThunk(
-  "accounts/fetchAccounts",
+  "account/fetchAccounts",
   async () => {
     const { data } = await axios.get("/accounts");
     return data as Account[];
@@ -31,7 +33,7 @@ export const fetchAccounts = createAsyncThunk(
 export const addNewAccount = createAsyncThunk<
   Account,
   { name: string; type: string }
->("accounts/addNewAccounts", async (account, thunkApi) => {
+>("account/addNewAccounts", async (account, thunkApi) => {
   let response;
   try {
     response = await axios.post("accounts", { pending: true, ...account });
@@ -45,7 +47,14 @@ export const addNewAccount = createAsyncThunk<
 export const accountSlice = createSlice({
   name: "account",
   initialState,
-  reducers: {},
+  reducers: {
+    selectAccount: (state, action: PayloadAction<Account | undefined>) => {
+      return {
+        ...state,
+        selectedAccount: action.payload,
+      };
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchAccounts.pending, (state, action) => {
       state.status.accounts = "loading";
@@ -70,4 +79,8 @@ export const accountSlice = createSlice({
   },
 });
 
-export default accountSlice.reducer;
+const { actions, reducer } = accountSlice;
+
+export const { selectAccount } = actions;
+
+export default reducer;
