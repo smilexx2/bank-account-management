@@ -1,25 +1,24 @@
 import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
+import styled from "styled-components";
+import Login from "./components/Login";
+import Account from "./features/account/Account";
+import useAuth from "./hooks/useAuth";
+
+const Container = styled.div`
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
 function App() {
+  const { accessToken, login } = useAuth();
+  console.log({ accessToken });
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container>
+      {!accessToken && <Login login={login} />}
+      {accessToken && <Account />}
+    </Container>
   );
 }
 

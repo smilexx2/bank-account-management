@@ -1,0 +1,23 @@
+{
+  "users": [
+    {
+      "email": "user@example.com",
+      "password": "$2a$10$aj0J9QnTVRPXLCiHu9T7iu7Zfqz.kuhkoHxf0J1PIKfKLAX/bQzGa",
+      "id": 1
+    }
+  ],
+  "accounts": [
+    {
+      "id": 1,
+      "name": "My Saver",
+      "type": "saving",
+      "pending": false
+    },
+    {
+      "id": 2,
+      "name": "My Daily Spending",
+      "type": "everyday",
+      "pending": false
+    }
+  ]
+}

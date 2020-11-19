@@ -3,7 +3,7 @@ import accountReducer from "../features/account/accountSlice";
 
 const store = configureStore({
   reducer: {
-    videoCall: accountReducer,
+    account: accountReducer,
   },
 });
 
