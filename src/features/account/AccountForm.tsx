@@ -10,6 +10,14 @@ import { useFormik } from "formik";
 import { addNewAccount } from "./accountSlice";
 import { unwrapResult } from "@reduxjs/toolkit";
 import { useAppDispatch } from "../../app/store";
+import * as Yup from "yup";
+
+const AccountSchema = Yup.object().shape({
+  name: Yup.string()
+    .matches(/^[a-z0-9]+$/i, "alpha numeric only")
+    .required("Required"),
+  type: Yup.string().required("Required"),
+});
 
 const accountTypes = [
   {
@@ -51,6 +59,7 @@ const AccountForm: React.FunctionComponent<{
         setAccountFormOpen(false);
       }
     },
+    validationSchema: AccountSchema,
   });
 
   const handleCancelButtonClick = () => {
@@ -71,6 +80,8 @@ const AccountForm: React.FunctionComponent<{
               label="Account Name"
               onChange={formik.handleChange}
               value={formik.values.name}
+              error={!!formik.errors.name}
+              helperText={formik.errors.name}
             />
           </MuiGrid>
           <MuiGrid item xs={12}>
@@ -81,6 +92,8 @@ const AccountForm: React.FunctionComponent<{
               label="Account Type"
               onChange={formik.handleChange}
               value={formik.values.type}
+              error={!!formik.errors.type}
+              helperText={formik.errors.type}
             >
               {accountTypes.map((option) => (
                 <MenuItem key={option.value} value={option.value}>

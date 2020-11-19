@@ -6,6 +6,12 @@ import styled from "styled-components";
 import MuiTypography from "@material-ui/core/Typography";
 import MuiButton from "@material-ui/core/Button";
 import { useFormik } from "formik";
+import * as Yup from "yup";
+
+const LoginSchema = Yup.object().shape({
+  username: Yup.string().required("Required"),
+  password: Yup.string().required("Required"),
+});
 
 const TextField = styled(MuiTextField)`
   width: 100%;
@@ -26,6 +32,7 @@ const Login: React.FunctionComponent<{
     onSubmit: ({ username, password }) => {
       login(username, password);
     },
+    validationSchema: LoginSchema,
   });
   return (
     <MuiContainer maxWidth="xs">
@@ -42,6 +49,8 @@ const Login: React.FunctionComponent<{
               variant="outlined"
               onChange={formik.handleChange}
               value={formik.values.username}
+              error={!!formik.errors.username}
+              helperText={formik.errors.username}
             />
           </MuiGrid>
           <MuiGrid item xs={12}>
@@ -53,6 +62,8 @@ const Login: React.FunctionComponent<{
               variant="outlined"
               onChange={formik.handleChange}
               value={formik.values.password}
+              error={!!formik.errors.password}
+              helperText={formik.errors.password}
             />
           </MuiGrid>
           <MuiGrid item xs={12}>
