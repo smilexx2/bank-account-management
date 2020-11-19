@@ -12,10 +12,12 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { RootState } from "../../app/store";
 import AccountForm from "./AccountForm";
-import { fetchAccounts, selectAccount, Account } from "./accountSlice";
+import { Account, fetchAccounts, selectAccount } from "./accountSlice";
 
 const Paper = styled(MuiPaper)`
   width: 100%;
+  margin-top: 68px;
+  margin-bottom: 68px;
 `;
 
 const AddButton = styled(MuiFab)`

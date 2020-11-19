@@ -1,9 +1,10 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 interface Transaction {
   id: number;
   date: Date;
+  type: string;
   detail: string;
   deposit?: string;
   withdrawals?: string;

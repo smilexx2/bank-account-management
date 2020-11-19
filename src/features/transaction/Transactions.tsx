@@ -1,11 +1,11 @@
 import React from "react";
 import MuiButton from "@material-ui/core/Button";
-import styled from "styled-components";
-import { DataGrid, ColDef } from "@material-ui/data-grid";
+import { ColDef, DataGrid } from "@material-ui/data-grid";
 import { useDispatch, useSelector } from "react-redux";
+import styled from "styled-components";
 import { RootState } from "../../app/store";
-import { fetchTransactions, reset } from "./transactionSlice";
 import { selectAccount } from "../account/accountSlice";
+import { fetchTransactions, reset } from "./transactionSlice";
 
 const Container = styled.div`
   align-self: stretch;
@@ -38,7 +38,8 @@ const Transaction: React.FunctionComponent = () => {
 
   const columns: ColDef[] = [
     { field: "date", headerName: "Date", type: "date", width: 130 },
-    { field: "detail", headerName: "Detail", width: 500 },
+    { field: "type", headerName: "Type", width: 130 },
+    { field: "detail", headerName: "Detail", width: 300 },
     { field: "deposit", headerName: "Deposit", width: 200 },
     { field: "withdrawals", headerName: "Withdrawals", width: 200 },
     { field: "balance", headerName: "Balance", width: 200 },

@@ -21,20 +21,101 @@
     },
     {
       "pending": true,
-      "name": "fewfewfewf",
-      "type": "everyday",
+      "name": "Salary",
+      "type": "savings",
       "id": 3
     }
   ],
   "transactions": [
     {
       "id": 1,
-      "date": "2020-10-23T00:00:00.000Z",
-      "detail": "Transfer from Account 1",
+      "date": "03 Mar 2020",
+      "type": "Direct Debit",
+      "detail": "7-Eleven",
       "deposit": null,
-      "withdrawals": "$1.00",
-      "balance": "$7.02",
+      "withdrawals": "$80.50",
+      "balance": "$106.37",
       "accountId": 1
+    },
+    {
+      "id": 2,
+      "date": "03 Mar 2020",
+      "type": "EFTPOS",
+      "detail": "Medical Insurance",
+      "deposit": null,
+      "withdrawals": "$33.97",
+      "balance": "$186.87",
+      "accountId": 1
+    },
+    {
+      "id": 3,
+      "date": "03 Mar 2020",
+      "type": "EFTPOS",
+      "detail": "Medibank",
+      "deposit": null,
+      "withdrawals": "$16.50",
+      "balance": "$220.84",
+      "accountId": 1
+    },
+    {
+      "id": 4,
+      "date": "10 Aug 2020",
+      "type": "EFTPOS",
+      "detail": "Aus Post",
+      "deposit": null,
+      "withdrawals": "$30.00",
+      "balance": "$5,717.94",
+      "accountId": 2
+    },
+    {
+      "id": 5,
+      "date": "10 Aug 2020",
+      "type": "EFTPOS",
+      "detail": "Chemist Warehouse AU",
+      "deposit": null,
+      "withdrawals": "$90.00",
+      "balance": "$5,747.94",
+      "accountId": 2
+    },
+    {
+      "id": 6,
+      "date": "10 Aug 2020",
+      "type": "EFTPOS",
+      "detail": "Medibank",
+      "deposit": null,
+      "withdrawals": "$50.88",
+      "balance": "$5,837.94",
+      "accountId": 2
+    },
+    {
+      "id": 7,
+      "date": "10 Aug 2020",
+      "type": "CASH OUT",
+      "detail": "Card Entry At Docklank Branch",
+      "deposit": null,
+      "withdrawals": "$675.00",
+      "balance": "$5,888.82",
+      "accountId": 2
+    },
+    {
+      "id": 8,
+      "date": "05 Aug 2020",
+      "type": "EFTPOS",
+      "detail": "Aus Post",
+      "deposit": null,
+      "withdrawals": "$33.95",
+      "balance": "$6,563.82",
+      "accountId": 2
+    },
+    {
+      "id": 9,
+      "date": "05 Aug 2020",
+      "type": "EFTPOS",
+      "detail": "OPENING BALANCE",
+      "deposit": null,
+      "withdrawals": null,
+      "balance": "$6,597.77",
+      "accountId": 2
     }
   ]
 }
