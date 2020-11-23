@@ -41,6 +41,6 @@ Frontend app is running on:
 
 ### Login detail for testing
 
-username: user@example.com
+username: `user@example.com`
 
-password: password
+password: `password`
