@@ -38,3 +38,8 @@ Start the frontend project:
 Frontend app is running on:
 
 [http://localhost:3000](http://localhost:3000)
+
+### Login detail for testing
+
+username: user@example.com
+password: password
